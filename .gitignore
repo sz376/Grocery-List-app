@@ -1,4 +1,4 @@
 node_modules/
 package-lock.json
-sql.env
+secret_tokens.env
 __pycache__

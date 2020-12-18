@@ -1,32 +1,34 @@
-    
-import * as React from 'react';
-
-
-import { Button } from './Button';
-import { Socket } from './Socket';
+import * as React from "react";
+import { Button } from "./Button";
+import { Socket } from "./Socket";
+import RemoveButton from "./RemoveButton";
 
 export function Content() {
-    const [addresses, setAddresses] = React.useState([]);
-    
-    function getNewAddresses() {
-        React.useEffect(() => {
-            Socket.on('addresses received', (data) => {
-                console.log("Received addresses from server: " + data['allAddresses']);
-                setAddresses(data['allAddresses']);
-            })
-        });
-    }
-    
-    getNewAddresses();
+  const [items, setItems] = React.useState([]);
 
-    return (
-        <div>
-            <h1>USPS Addresses!</h1>
-                <ol>
-                    {addresses.map((address, index) =>
-                        <li key={index}>{address}</li>)}
-                </ol>
-            <Button />
-        </div>
-    );
+  function getNewItems() {
+    React.useEffect(() => {
+      Socket.on("items received", (data) => {
+        console.log("Received items from server: " + data["allItems"]);
+        setItems(data["allItems"]);
+      });
+    });
+  }
+  
+  getNewItems();
+
+  return (
+    <div>
+      <h1>Grocery List!</h1>
+      <ul>
+        {items.map((item, index) => (
+          <li key={index}>
+            {item}  <RemoveButton item = {item} />
+          </li>
+          
+        ))}
+      </ul>
+      <Button />
+    </div>
+  );
 }
