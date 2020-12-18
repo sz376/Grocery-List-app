@@ -20,6 +20,8 @@ export function Content() {
   return (
     <div>
       <h1>Grocery List!</h1>
+      <h2>You can also text add [your item] to 12516640317 to add an item to the list</h2>
+      <h3>Text "remove [your item]" to 12516640317 remove an item</h3>
       <ul>
         {items.map((item, index) => (
           <li key={index}>
