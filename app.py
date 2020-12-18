@@ -86,15 +86,17 @@ def on_new_remove(data):
 def index():
     emit_all_items(ITEMS_RECEIVED_CHANNEL)
     body = request.values.get("Body", None)
-    print(body)
-    if body[:3] == "add":
-        db.session.add(models.Grocerylist(body[4:]))
-        db.session.commit()
-    elif body[:6] == "remove":
-        db.session.query(models.Grocerylist).filter_by(item=body[7:]).delete()
-        db.session.commit()
+    if body is not None:
+        if body[:3] == "add":
+            db.session.add(models.Grocerylist(body[4:]))
+            db.session.commit()
+        elif body[:6] == "remove":
+            db.session.query(models.Grocerylist).filter_by(item=body[7:]).delete()
+            db.session.commit()
+        else:
+            print("we doing nothing")
     else:
-        print("we doing nothing")
+        print("no texts :(")
 
     return flask.render_template("index.html")
 
