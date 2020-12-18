@@ -1,3 +1,7 @@
+[Heroku link](https://agile-mesa-65990.herokuapp.com/)
+Text `add [your item]` to 12516640317 to add an item to the list
+Text `remove [your item]` to remove an item
+
 # Set up React  
 0. `cd ~/environment && git clone https://github.com/Sresht/lect11/ && cd lect11`    
 1. Install your stuff!    
