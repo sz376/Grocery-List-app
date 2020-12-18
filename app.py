@@ -85,7 +85,7 @@ def on_new_remove(data):
     
     emit_all_items(ITEMS_RECEIVED_CHANNEL)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     emit_all_items(ITEMS_RECEIVED_CHANNEL)
     resp = MessagingResponse()
