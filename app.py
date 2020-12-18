@@ -87,12 +87,12 @@ def index():
     emit_all_items(ITEMS_RECEIVED_CHANNEL)
     body = request.values.get("Body", None)
     if body is not None:
-        if body[:3] == "add":
+        if body[:3] == "add" or body[:3] == "Add":
             print("adding " + body[4:])
             db.session.add(models.Grocerylist(body[4:]))
             db.session.commit()
             emit_all_items(ITEMS_RECEIVED_CHANNEL)
-        elif body[:6] == "remove":
+        elif body[:6] == "remove" or body[:6] == "Remove":
             print("removing " + body[7:])
             db.session.query(models.Grocerylist).filter_by(item=body[7:]).delete()
             db.session.commit()
