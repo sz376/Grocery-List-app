@@ -24,6 +24,7 @@ load_dotenv(dotenv_path)
 database_uri = os.environ["DATABASE_URL"]
 twilio_sid = os.environ["TWILIO_SID"]
 twilio_auth = os.environ["TWILIO_AUTH"]
+my_phone_num = os.environ["PHONE_NUM"]
 
 # the following line needs your Twilio Account SID and Auth Token
 client = Client(twilio_sid, twilio_auth)
@@ -51,7 +52,7 @@ def on_connect():
     socketio.emit("connected", {"test": "Connected"})
 
     client.messages.create(
-        to="+19733921387", from_="+12516640317", body="Welcome to my Grocery List app!"
+        to=my_phone_num, from_="+12516640317", body="Welcome to my Grocery List app!"
     )
 
     emit_all_items(ITEMS_RECEIVED_CHANNEL)
@@ -85,6 +86,7 @@ def on_new_remove(data):
 @app.route("/", methods=["GET", "POST"])
 def index():
     emit_all_items(ITEMS_RECEIVED_CHANNEL)
+    #body contains SMSs that are sent to 12516640317 from users
     body = request.values.get("Body", None)
     if body is not None:
         if body[:3] == "add" or body[:3] == "Add":

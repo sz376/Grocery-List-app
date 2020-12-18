@@ -32,15 +32,22 @@ If you see any error messages, make sure you use `sudo pip` or `sudo npm`. If it
     c) `\l` look for ec2-user as a database    
 7. Make a new user:    
     a) `psql` (if you already quit out of psql)    
-    ## REPLACE THE [VALUES] IN THIS COMMAND! Type this with a new (short) unique password.   
+     REPLACE THE [VALUES] IN THIS COMMAND! Type this with a new (short) unique password.   
     b) I recommend 4-5 characters - it doesn't have to be very secure. Remember this password!  
         `create user [some_username_here] superuser password '[some_unique_new_password_here]';`    
     c) `\q` to quit out of sql    
 8. `cd` into `lect11` and make a new file called `sql.env` and add `SQL_USER=` and `SQL_PASSWORD=` in it  
 9. Fill in those values with the values you put in 7. b)  
-  
-  
+10. Enter the following commands to create the database:
+    ```
+    $python
+    $import models
+    $models.DB.create_all()
+    $models.DB.session.commit()
+    ```
+
 # Enabling read/write from SQLAlchemy  
+
 There's a special file that you need to enable your db admin password to work for:  
 1. Open the file in vim: `sudo vim /var/lib/pgsql9/data/pg_hba.conf`
 If that doesn't work: `sudo vim $(psql -c "show hba_file;" | grep pg_hba.conf)`  
