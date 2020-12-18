@@ -86,6 +86,7 @@ def on_new_remove(data):
 def index():
     emit_all_items(ITEMS_RECEIVED_CHANNEL)
     body = request.values.get("Body", None)
+    print(body)
     if body[:3] == "add":
         db.session.add(models.Grocerylist(body[4:]))
         db.session.commit()
