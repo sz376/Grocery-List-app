@@ -89,11 +89,12 @@ def on_new_remove(data):
 def index():
     emit_all_items(ITEMS_RECEIVED_CHANNEL)
     resp = MessagingResponse()
+
+    # Add a message
     resp.message("The Robots are coming! Head for the hills!")
 
     return flask.render_template("index.html")
-
-
+    
 if __name__ == '__main__': 
     socketio.run(
         app,
