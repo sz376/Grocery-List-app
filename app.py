@@ -88,11 +88,15 @@ def index():
     body = request.values.get("Body", None)
     if body is not None:
         if body[:3] == "add":
+            print("adding " + body[4:])
             db.session.add(models.Grocerylist(body[4:]))
             db.session.commit()
+            emit_all_items(ITEMS_RECEIVED_CHANNEL)
         elif body[:6] == "remove":
+            print("removing " + body[7:])
             db.session.query(models.Grocerylist).filter_by(item=body[7:]).delete()
             db.session.commit()
+            emit_all_items(ITEMS_RECEIVED_CHANNEL)
         else:
             print("we doing nothing")
     else:
